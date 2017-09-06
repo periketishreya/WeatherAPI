@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="js/jquery-3.2.1.min.js"></script>
+     <script>
+    $(document).ready(function() {
+    $(".cityName").change(function() {
+        var location= $(".cityName").val();
+    console.log("hello world"+location);
+        
+        $.ajax({
+           url: 'http://api.openweathermap.org/data/2.5/weather?q='+location+'&appid=7994523d0681bde25216437449ead8e9',
+           method:'GET',
+            success:function(data){
+              console.log(data)
+               // $(".data").text(data.weather[0].main)
+               // $(".data").text(JSON.parse(data.responseText))
+                $(".data").text(JSON.stringify(data))
+            },
+            
+                error:function(data)
+            {
+                console.log(data) 
+                 $(".error").text(JSON.parse(data.responseText).message)
+            }
+        
+        })
+    });
+  
+});
+ </script>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+ <select class="cityName" >
+  <option value="select name">select name</option>
+   <option value="Georgia"> Georgia </option>
+    <option value="Danbury">Danbury</option>
+      <option value="Austin">Austin</option>   
+ </select>
+    <div class="data"></div>
+    <div class="error"></div>
+</body>
+</html>
